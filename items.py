@@ -10,3 +10,4 @@ class Jdgoods Item(scrapy.Item):
   author = scrapy.Field()
   pub = scrapy.Field()
   seller = scrapy.Field()
+  #补充内容
