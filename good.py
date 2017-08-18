@@ -38,6 +38,58 @@ class GoodSpider(scrapy.Spider):
       req3.add_header('User-Agent',random.choice(ua))
       listdata = urllib.request.urlopen(req3).read().decode('utf-8','ignore')
       pat3 = ''#补充内容
-      all
+      allpage = re.compile(pat3).findall(listdata)
+      if(len(allpage)>0):
+        pass
+      else:
+        allpage = [1]
+      allurl.append({thispdnum:allpage[0]})
+      #测试
+      if(x>2):
+        break
+      x+=1
+      for n in catall2:
+        thispage = allurl[x][n]
+        for p in range(1,int(thispage)+1):
+          thispageurl = ''#补充内容
+          print(thispageurl)
+          yield Request(thispageurl,callback=self.parse)
+        x+=1
+    def
   def parse(self,response):
-    
+    pd = response.xpath()#补充内容
+    if(len(pd)==0):
+      pd = ['缺省','缺省']
+    if(len(pd)==1):
+      pda = pd[0]
+      pd = [pda,'缺省']
+    pd1 = pd[0]
+    pd2 = pd[1]
+    print(pd1)
+    bookname = response.xpath('')#补充内容
+    print(bookname[0])
+    allskupat = ''#补充内容
+    allsku = re.compile(allskupat).findall(listdata)
+    print(allsku)
+    author = response.xpath('')#补充内容
+    pub = response.xpath('')#补充内容 
+    seller = response.xpath('')#补充内容
+    for n in range(0,len(seller)):
+      name = bookname[n+3]
+      thissku = allsku[n]
+      priceurl = ''#补充内容
+      pricepat = ''#补充内容
+      price = re.compile(pricepat).findall(pricedata)[0]
+      pnumurl = ''#补充内容
+      pnumdata = urllib.request.urlopen().read().decode('utf-8','ignore')
+      pnumpat = ''#补充内容
+      pnum = re.compile(pnumpat).findall(pnumdata)
+      thisauthor = author[n]
+      thispub = pub[n]
+      thisseller = seller[n]
+      print(pd1)
+      print(pd2)
+      print(name)
+      print(author)
+      print(pub)
+      print(seller)
