@@ -33,6 +33,11 @@ class GoodSpider(scrapy.Spider):
     allurl = []
     x = 0
     for m in catall2:
-      
+      thispdnum = m
+      req3 = urllib.request.Request('https://')#补充内容
+      req3.add_header('User-Agent',random.choice(ua))
+      listdata = urllib.request.urlopen(req3).read().decode('utf-8','ignore')
+      pat3 = ''#补充内容
+      all
   def parse(self,response):
     
