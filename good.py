@@ -1,4 +1,5 @@
 import re
+import urllib.request
 import random
 from jdgood.items import JdgoodsItem
 from lxml import etree
@@ -13,8 +14,8 @@ class GoodSpider(scrapy.Spider):
          'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)']
     req1 = urllib.request.Request('https://book.jd.com/')
     req1.add_header('User-Agent',random.choice(ua))
-    allpddata = urllib.request.urlopen(req1).red().decode('utf-8','ignore')
-    pat1 = ''#补充内容
+    allpddata = urllib.request.urlopen(req1).read().decode('utf-8','ignore')
+    pat1 = ''#所有大频道
     allpd = re.compile(pat1).findall(allpddata)
     catall = []
     for i in allpd:
@@ -22,22 +23,22 @@ class GoodSpider(scrapy.Spider):
       req2 = urllib.request.Request(thispd)
       req2.add_header('User-Agent',random.choice(ua))
       pddata = urllib.request.urlopen(req2).read().decode('utf-8','ignore')
-      pat2 = ''#补充内容
+      pat2 = 'href="//list.jd.com/list.html?cat=([0-9,]*?)[&"]'#补充内容href="//list.jd.com/list.html?cat=1713,3258,6569&go=0"
       catdata = re.compile(pat2).findall(pddata)
       for j in catdata:
         catall.append(j)
     #print(len(catall))
     #print(catall[0])
-    catal2 = set(catall)
+    catal2 = set(catall) #去重 功能
     #print(len(catall2))
     allurl = []
     x = 0
     for m in catall2:
       thispdnum = m
-      req3 = urllib.request.Request('https://')#补充内容
+      req3 = urllib.request.Request('https://')#各个小频道url
       req3.add_header('User-Agent',random.choice(ua))
       listdata = urllib.request.urlopen(req3).read().decode('utf-8','ignore')
-      pat3 = ''#补充内容
+      pat3 = ''#各个小频道总页数
       allpage = re.compile(pat3).findall(listdata)
       if(len(allpage)>0):
         pass
@@ -48,14 +49,14 @@ class GoodSpider(scrapy.Spider):
       if(x>2):
         break
       x+=1
-      for n in catall2:
-        thispage = allurl[x][n]
-        for p in range(1,int(thispage)+1):
-          thispageurl = ''#补充内容
-          print(thispageurl)
-          yield Request(thispageurl,callback=self.parse)
-        x+=1
-    def
+    x = 0 
+    for n in catall2:
+      thispage = allurl[x][n]
+      for p in range(1,int(thispage)+1):
+        thispageurl = ''#各个小频道的url
+        print(thispageurl)
+        yield Request(thispageurl,callback=self.parse)
+      x+=1
   def parse(self,response):
     pd = response.xpath()#补充内容
     if(len(pd)==0):
