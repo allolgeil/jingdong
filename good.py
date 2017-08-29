@@ -58,7 +58,7 @@ class GoodSpider(scrapy.Spider):
         yield Request(thispageurl,callback=self.parse)
       x+=1
   def parse(self,response):
-    pd = response.xpath()#补充内容
+    pd = response.xpath()#频道xpath表达式
     if(len(pd)==0):
       pd = ['缺省','缺省']
     if(len(pd)==1):
@@ -67,23 +67,23 @@ class GoodSpider(scrapy.Spider):
     pd1 = pd[0]
     pd2 = pd[1]
     print(pd1)
-    bookname = response.xpath('')#补充内容
+    bookname = response.xpath('')#书名xpath表达式
     print(bookname[0])
-    allskupat = ''#补充内容
+    allskupat = ''#价格pattern
     allsku = re.compile(allskupat).findall(listdata)
     print(allsku)
-    author = response.xpath('')#补充内容
-    pub = response.xpath('')#补充内容 
-    seller = response.xpath('')#补充内容
+    author = response.xpath('')#作者xpath
+    pub = response.xpath('')#出版社
+    seller = response.xpath('')#卖家
     for n in range(0,len(seller)):
       name = bookname[n+3]
       thissku = allsku[n]
-      priceurl = ''#补充内容
-      pricepat = ''#补充内容
+      priceurl = ''#价格连接
+      pricepat = ''#价格pattern
       price = re.compile(pricepat).findall(pricedata)[0]
-      pnumurl = ''#补充内容
+      pnumurl = ''#数量url
       pnumdata = urllib.request.urlopen().read().decode('utf-8','ignore')
-      pnumpat = ''#补充内容
+      pnumpat = ''#数量pattern
       pnum = re.compile(pnumpat).findall(pnumdata)
       thisauthor = author[n]
       thispub = pub[n]
