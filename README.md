@@ -1,3 +1,4 @@
+#京东网页源码最近发生了变化，Pattern部分暂时暂未调整
 # jingdong
 capture jingdong by scrapy
 
