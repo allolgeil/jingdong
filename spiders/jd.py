@@ -60,10 +60,10 @@ class GoodSpider(scrapy.Spider):
   def parse(self,response):
     pd = response.xpath()#频道xpath表达式
     if(len(pd)==0):
-      pd = ['缺省','缺省']
+      pd = ['无','无']
     if(len(pd)==1):
       pda = pd[0]
-      pd = [pda,'缺省']
+      pd = [pda,'无']
     pd1 = pd[0]
     pd2 = pd[1]
     print(pd1)
